@@ -18,7 +18,7 @@ const Home = () => {
         His palms are sweaty, knees weak, arms are heavy
       </p>
       <p className="font-rebond font-extrabold">
-        There's vomit on his sweater already, mom's spaghetti
+        There&apos;s vomit on his sweater already, mom&apos;s spaghetti
       </p>
       <Button variant="pressed">
         generate
@@ -28,8 +28,6 @@ const Home = () => {
       <Button className="h-16 w-16 flex items-center justify-center" variant="pressedDark">
         <ChevronRight size={48} />
       </Button>
-
-  
     </div>
   );
 };
