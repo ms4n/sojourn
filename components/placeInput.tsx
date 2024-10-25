@@ -1,15 +1,47 @@
+'use client';
+
+import { useDebounce } from '@/hooks/use-debounce';
+import { getPlacePredictions } from '@/lib/google-places';
+import { PlacePrediction } from '@/types/google-places';
 import { ChevronRight, MapPin } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TypingPlaceholder } from './random/typing-placeholder';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 
 interface PlaceInputProps {
-  onClick: () => void;
+  onClick: (place: PlacePrediction) => void;
 }
 
 export function PlaceInput({ onClick }: PlaceInputProps) {
   const [destination, setDestination] = useState('');
+  const [predictions, setPredictions] = useState<PlacePrediction[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedPrediction, setSelectedPrediction] =
+    useState<PlacePrediction | null>(null);
+
+  const debouncedDestination = useDebounce(destination, 300);
+
+  useEffect(() => {
+    async function fetchPredictions() {
+      if (!debouncedDestination) {
+        setPredictions([]);
+        return;
+      }
+
+      setIsLoading(true);
+      try {
+        const results = await getPlacePredictions(debouncedDestination);
+        setPredictions(results);
+      } catch (error) {
+        console.error('Error fetching predictions:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchPredictions();
+  }, [debouncedDestination]);
 
   return (
     <div className="flex flex-col items-center space-y-4">
@@ -21,7 +53,10 @@ export function PlaceInput({ onClick }: PlaceInputProps) {
             placeholder=" "
             className="border-b-2 border-gray-300 px-6 py-8 pl-12 pr-12 font-rebond text-2xl text-accentGray focus:outline-none"
             value={destination}
-            onChange={(e) => setDestination(e.target.value)}
+            onChange={(e) => {
+              setDestination(e.target.value);
+              setSelectedPrediction(null);
+            }}
           />
           {!destination && (
             <div className="pointer-events-none absolute left-12 top-1/2 -translate-y-1/2 text-gray-400">
@@ -32,10 +67,36 @@ export function PlaceInput({ onClick }: PlaceInputProps) {
         <Button
           variant="pressed"
           className="absolute bottom-0 right-0 top-3 z-10 mx-3 flex items-center justify-center"
-          onClick={onClick}
+          onClick={() => selectedPrediction && onClick(selectedPrediction)}
+          disabled={!selectedPrediction}
         >
           <ChevronRight className="h-6 w-6" />
         </Button>
+
+        {predictions.length > 0 && (
+          <div className="absolute mt-1 w-full rounded-md border border-gray-200 bg-white shadow-lg">
+            <ul className="max-h-60 overflow-auto py-2">
+              {predictions.map((prediction) => (
+                <li
+                  key={prediction.place_id}
+                  className="cursor-pointer px-4 py-2 hover:bg-gray-100"
+                  onClick={() => {
+                    setDestination(prediction.description);
+                    setSelectedPrediction(prediction);
+                    setPredictions([]);
+                  }}
+                >
+                  <div className="font-medium">
+                    {prediction.structured_formatting.main_text}
+                  </div>
+                  <div className="text-sm text-gray-500">
+                    {prediction.structured_formatting.secondary_text}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

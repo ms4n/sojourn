@@ -1,17 +1,17 @@
 'use client';
 
-import PlaceInput from '../components/placeInput';
+import PlaceInput from '@/components/placeInput';
+import { PlacePrediction } from '@/types/google-places';
 
-export default function Page() {
-  const handleButtonClick = () => {
-    console.log('Button clicked!');
+export default function Home() {
+  const handlePlaceSelect = (place: PlacePrediction) => {
+    console.log('Selected place:', place);
+    // Handle the selected place here
   };
 
   return (
-    <div className="flex h-full w-full items-center justify-center px-4">
-      <div className="mx-auto w-full max-w-screen-lg">
-        <PlaceInput onClick={handleButtonClick} />
-      </div>
-    </div>
+    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+      <PlaceInput onClick={handlePlaceSelect} />
+    </main>
   );
 }
