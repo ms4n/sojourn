@@ -1,6 +1,6 @@
 'use client';
 
-import { QuestionButton } from '../components/ui/question-button';
+import PlaceInput from '../components/placeInput';
 
 export default function Page() {
   const handleButtonClick = () => {
@@ -8,10 +8,10 @@ export default function Page() {
   };
 
   return (
-    <div className="h-[calc(100vh-100px)] max-w-screen-lg flex items-center justify-center">
-      <main className="container mx-auto font-rebond ">
-        <QuestionButton onClick={handleButtonClick} />
-      </main>
+    <div className="flex h-full w-full items-center justify-center px-4">
+      <div className="mx-auto w-full max-w-screen-lg">
+        <PlaceInput onClick={handleButtonClick} />
+      </div>
     </div>
   );
 }

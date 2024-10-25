@@ -19,9 +19,9 @@ const buttonVariants = cva(
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
         pressed:
-          'bg-primary text-primary-foreground shadow-[0_4px_0_0_rgb(151,0,136)] hover:shadow-[0_4px_0_0_rgb(151,0,136)] hover:translate-y-[2px] active:shadow-[0_0px_0_0] active:translate-y-[6px] transition-all duration-150',
+          'bg-primary text-primary-foreground shadow-[0_4px_0_0_rgb(151,0,136)] hover:shadow-[0_4px_0_0_rgb(151,0,136)] active:shadow-[0_0px_0_0] active:translate-y-[1px] transition-all duration-150',
         pressedDark:
-          'bg-[rgb(67,67,68)] text-primary-foreground shadow-[0_4px_0_0_rgba(29,29,29,1)] hover:shadow-[0_4px_0_0_rgba(29,29,29,1)] hover:translate-y-[2px] active:shadow-[0_0px_0_0] active:translate-y-[6px] transition-all duration-150',
+          'bg-accentGray text-primary-foreground shadow-[0_4px_0_0_rgba(29,29,29,1)] hover:shadow-[0_4px_0_0_rgba(29,29,29,1)] active:shadow-[0_0px_0_0] active:translate-y-[1px] transition-all duration-150',
       },
       size: {
         default: 'h-9 px-4 py-2',

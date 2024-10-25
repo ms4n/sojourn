@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Add these at the top of your globals.css file */
+@layer base {
+  :root {
+    min-height: 100%;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+}
+
 @font-face {
   font-family: 'Rebond Grotesque';
   src: url('/fonts/rebond-grotesque/rebond-grotesque-regular.otf')
@@ -73,6 +85,7 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+    --accent-gray: 67 0% 26.7%; /* Example HSL value for gray */
   }
 
   .dark {
@@ -103,6 +116,7 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+    --accent-gray: 67 0% 26.7%; /* Example HSL value for gray */
   }
 }
 

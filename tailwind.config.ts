@@ -2,7 +2,12 @@ import type { Config } from 'tailwindcss';
 
 const config = {
   darkMode: ['class'],
-  content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+  ],
   prefix: '',
   theme: {
     container: {
@@ -48,6 +53,7 @@ const config = {
           foreground: 'hsl(var(--card-foreground))',
         },
         cream: 'rgb(250 250 246)', // cream
+        accentGray: 'hsl(var(--accent-gray))',
       },
       borderRadius: {
         lg: 'var(--radius)',
