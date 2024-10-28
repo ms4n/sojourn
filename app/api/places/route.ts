@@ -11,24 +11,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Input is required' }, { status: 400 });
     }
 
+    const requestBody = {
+      input,
+    };
+
     const response = await fetch(`${PLACES_API_BASE}/places:autocomplete`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'X-Goog-Api-Key': API_KEY!,
       },
-      body: JSON.stringify({
-        input,
-        locationBias: {
-          circle: {
-            center: {
-              latitude: 37.7937,
-              longitude: -122.3965,
-            },
-            radius: 500.0,
-          },
-        },
-      }),
+      body: JSON.stringify(requestBody),
     });
 
     if (!response.ok) {

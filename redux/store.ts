@@ -1,7 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
+import placeReducer from './features/slice';
+import tripReducer from './features/trip-slice';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    place: placeReducer,
+    trip: tripReducer,
+  },
   devTools: process.env.NODE_ENV !== 'production',
 });
 

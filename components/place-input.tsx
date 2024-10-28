@@ -1,11 +1,12 @@
 'use client';
 
 import { useDebounce } from '@/hooks/use-debounce';
-import { getPlacePredictions } from '@/lib/google-places';
+import { getPlacePredictions } from '@/lib/controllers/google-places';
 import { PlacePrediction } from '@/types/google-places';
 import { ChevronRight, MapPin } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { TypingPlaceholder } from './random/typing-placeholder';
+import { PlacesSkeleton } from './skeletons/places-skeleton';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 
@@ -20,7 +21,7 @@ export function PlaceInput({ onClick }: PlaceInputProps) {
   const [selectedPrediction, setSelectedPrediction] =
     useState<PlacePrediction | null>(null);
 
-  const debouncedDestination = useDebounce(destination, 100);
+  const debouncedDestination = useDebounce(destination, 300);
 
   useEffect(() => {
     async function fetchPredictions() {
@@ -63,14 +64,15 @@ export function PlaceInput({ onClick }: PlaceInputProps) {
         </div>
         <Button
           variant="pressed"
+          disabled={!selectedPrediction}
           className="absolute bottom-0 right-0 top-3 z-10 mx-3 flex items-center justify-center"
           onClick={() => selectedPrediction && onClick(selectedPrediction)}
         >
           <ChevronRight className="h-6 w-6" />
         </Button>
 
-        {predictions.length > 0 && (
-          <div className="absolute mt-1 w-full rounded-md border border-gray-200 bg-white shadow-lg">
+        {predictions.length > 0 ? (
+          <div className="absolute mt-3 w-full rounded-md border border-gray-200 bg-white shadow-sm">
             <ul className="max-h-60 overflow-auto py-2">
               {predictions.map((prediction) => (
                 <li
@@ -79,7 +81,7 @@ export function PlaceInput({ onClick }: PlaceInputProps) {
                   onClick={() => {
                     setDestination(prediction.description);
                     setSelectedPrediction(prediction);
-                    setPredictions([]);
+                
                   }}
                 >
                   <div className="font-medium">
@@ -92,6 +94,8 @@ export function PlaceInput({ onClick }: PlaceInputProps) {
               ))}
             </ul>
           </div>
+        ) : isLoading && (
+          <PlacesSkeleton />
         )}
       </div>
     </div>

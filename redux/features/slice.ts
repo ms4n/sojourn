@@ -1,4 +1,27 @@
+import { PlacePrediction } from '@/types/google-places';
 import { createSlice } from '@reduxjs/toolkit';
+
+type PlaceState = {
+  destination: PlacePrediction | null;
+};
+
+const initialState: PlaceState = {
+  destination: null,
+};
+
+export const placeSlice = createSlice({
+  name: 'place',
+  initialState,
+  reducers: {
+    setDestination: (state, action) => {
+      state.destination = action.payload;
+    },
+  },
+});
+
+export const { setDestination } = placeSlice.actions;
+export default placeSlice.reducer;
+
 
 //example slice
 
