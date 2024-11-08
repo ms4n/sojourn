@@ -76,6 +76,7 @@ const config = {
       },
       fontFamily: {
         rebond: ['"Rebond Grotesque"', 'sans-serif'],
+        playfair: ['var(--font-playfair)'],
       },
     },
   },

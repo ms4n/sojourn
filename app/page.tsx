@@ -1,12 +1,13 @@
 'use client';
 
-import { PlaceInput } from '@/components/place-input';
-import { TripName } from '@/components/trip-name';
 import { setDestination } from '@/redux/features/slice';
 import { setTripDetails } from '@/redux/features/trip-slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { PlacePrediction } from '@/types/google-places';
 import { DateRange } from 'react-day-picker';
+
+import PlaceInput from '@/components/place-input';
+import TripName from '@/components/trip-name';
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -16,7 +17,10 @@ export default function Home() {
     dispatch(setDestination(place));
   };
 
-  const handleTripDetails = (tripName: string, dateRange: DateRange | undefined) => {
+  const handleTripDetails = (
+    tripName: string,
+    dateRange: DateRange | undefined
+  ) => {
     if (dateRange) {
       dispatch(
         setTripDetails({
