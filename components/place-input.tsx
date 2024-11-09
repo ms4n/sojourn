@@ -45,7 +45,7 @@ export function PlaceInput({ onClick }: PlaceInputProps) {
   }, [debouncedDestination]);
 
   return (
-    <div className="flex flex-col items-center space-y-4 px-4 sm:px-0">
+    <div className="flex flex-col items-center space-y-4">
       <h1 className="font-rebond text-4xl">where to next, adventurer?</h1>
       <div className="relative w-full">
         <MapPin className="absolute left-3 top-1/2 z-10 h-6 w-6 -translate-y-1/2 text-gray-400" />

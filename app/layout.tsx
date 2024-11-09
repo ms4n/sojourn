@@ -20,21 +20,25 @@ export default function RootLayout({
 }) {
   return (
     <Providers>
-       <html lang="en" className={`h-full ${playfair.variable}`}>
-      <body className="h-full overflow-hidden font-rebond">
-        <header className="absolute left-0 right-0 top-0 z-10">
-          <div className="container mx-auto max-w-screen-lg px-4 py-4 flex justify-between items-center">
-            <Link href="/" className={`${playfair.className} text-3xl text-primary`}>
-              Sojourn
-            </Link>
-            <Link href="/about" className="text-xl text-primary hover:underline">
+      <html lang="en" className={`h-full ${playfair.variable}`}>
+        <body className="h-full overflow-hidden font-rebond">
+          <header className="absolute left-0 right-0 top-0 z-10">
+            <div className="container mx-auto flex max-w-screen-lg items-center justify-between px-4 py-4">
+              <Link
+                href="/"
+                className={`${playfair.className} text-3xl text-primary`}
+              >
+                Sojourn
+              </Link>
+              <Link
+                href="/about"
+                className="text-xl text-primary hover:underline"
+              >
                 about
               </Link>
             </div>
           </header>
-        <main className="h-full container mx-auto max-w-screen-xl">
-          {children}
-        </main>
+          <main className="h-full">{children}</main>
         </body>
       </html>
     </Providers>
