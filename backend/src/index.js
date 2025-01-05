@@ -2,7 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const config = require("./config");
-const userRoutes = require("./routes/user.routes");
+const searchRoutes = require("./routes/search.routes");
+const eventsRoutes = require("./routes/events.routes");
 
 const app = express();
 
@@ -11,7 +12,8 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use("/api/users", userRoutes);
+app.use("/api/search", searchRoutes);
+app.use("/api/events", eventsRoutes);
 
 // MongoDB connection
 mongoose
